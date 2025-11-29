@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import * as Controller from '../controladores/users.controlador.js';
-import { validateUser } from '../validators/users.validator.js';
+import { userController } from '../controladores/users.controlador.js';
+import validateUser from '../validators/users.validator.js';
 
 const router = Router();
 
-router.get('/', Controller.getAll);
-router.get('/:id', Controller.getById);
-router.post('/', validateUser, Controller.create);
-router.put('/:id', validateUser, Controller.update);
-router.delete('/:id', Controller.remove);
+router.get('/', userController.getAll);
+router.get('/:id', userController.getOne);
+router.post('/', validateUser, userController.create);
+router.put('/:id', validateUser, userController.update);
+router.delete('/:id', userController.delete);
 
 export default router;

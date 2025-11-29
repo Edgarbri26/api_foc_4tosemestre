@@ -1,26 +1,32 @@
-import * as Service from '../services/categories.services.js';
+import { categoryService } from '../services/categories.services.js';
 
-export const getAll = async (req, res) => {
-    const { status, message, data } = await Service.getAll();
-    res.status(status).json({ message, data });
-};
+class CategoryController {
+    constructor() { }
 
-export const getById = async (req, res) => {
-    const { status, message, data } = await Service.getById(req.params.id);
-    res.status(status).json({ message, data });
-};
+    getAll = async (req, res) => {
+        const { message, status, data } = await categoryService.getall();
+        res.status(status).json({ message, data });
+    };
 
-export const create = async (req, res) => {
-    const { status, message, data } = await Service.create(req.body);
-    res.status(status).json({ message, data });
-};
+    getOne = async (req, res) => {
+        const { message, status, data } = await categoryService.getOne(req.params.id);
+        res.status(status).json({ message, data });
+    };
 
-export const update = async (req, res) => {
-    const { status, message, data } = await Service.update(req.params.id, req.body);
-    res.status(status).json({ message, data });
-};
+    create = async (req, res) => {
+        const { message, status, data } = await categoryService.create(req.body);
+        res.status(status).json({ message, data });
+    };
 
-export const remove = async (req, res) => {
-    const { status, message, data } = await Service.remove(req.params.id);
-    res.status(status).json({ message, data });
-};
+    update = async (req, res) => {
+        const { message, status, data } = await categoryService.update(req.params.id, req.body);
+        res.status(status).json({ message, data });
+    };
+
+    delete = async (req, res) => {
+        const { message, status, data } = await categoryService.delete(req.params.id);
+        res.status(status).json({ message, data });
+    };
+}
+
+export const categoryController = new CategoryController();
