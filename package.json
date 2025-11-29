@@ -1,0 +1,34 @@
+{
+  "name": "api15112025",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^7.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-validator": "^7.3.1",
+    "prisma": "^7.0.1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edgarbri26/api_foc_4tosemestre.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Edgarbri26/api_foc_4tosemestre/issues"
+  },
+  "homepage": "https://github.com/Edgarbri26/api_foc_4tosemestre#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
