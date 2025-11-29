@@ -1,13 +1,22 @@
 import { Router } from 'express';
-import * as Controller from '../controladores/roles.controlador.js';
-import { validateRole } from '../validators/roles.validator.js';
+import { roleController } from '../controladores/roles.controlador.js';
+import validateRole from '../validators/roles.validator.js';
 
 const router = Router();
 
-router.get('/', Controller.getAll);
-router.get('/:id', Controller.getById);
-router.post('/', validateRole, Controller.create);
-router.put('/:id', validateRole, Controller.update);
-router.delete('/:id', Controller.remove);
+//get all
+router.get('/', roleController.getAll);
+//http://localhost:3800/api/roles
 
+//create 
+router.post('/', validateRole, roleController.create);
+//http://localhost:3800/api/roles
+
+//update 
+router.put('/:id', validateRole, roleController.update);
+//http://localhost:3800/api/roles/:id
+
+//delete
+router.delete('/:id', roleController.delete);
+//http://localhost:3800/api/roles/:id
 export default router;

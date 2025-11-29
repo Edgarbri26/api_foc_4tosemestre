@@ -1,26 +1,35 @@
-import * as Service from '../services/roles.services.js';
+import { roleService } from '../services/roles.services.js';
 
-export const getAll = async (req, res) => {
-  const { status, message, data } = await Service.getAll();
-  res.status(status).json({ message, data });
-};
 
-export const getById = async (req, res) => {
-  const { status, message, data } = await Service.getById(req.params.id);
-  res.status(status).json({ message, data });
-};
+class RoleController {
 
-export const create = async (req, res) => {
-  const { status, message, data } = await Service.create(req.body);
-  res.status(status).json({ message, data });
-};
+  constructor() { }
 
-export const update = async (req, res) => {
-  const { status, message, data } = await Service.update(req.params.id, req.body);
-  res.status(status).json({ message, data });
-};
+  getAll = async (req, res) => {
+    const { message, status, data } = await roleService.getall();
+    res.status(status).json({ message, data });
+  };
 
-export const remove = async (req, res) => {
-  const { status, message, data } = await Service.remove(req.params.id);
-  res.status(status).json({ message, data });
-};
+  getOne = async (req, res) => {
+    const { message, status, data } = await roleService.getOne(req.params.id);
+    res.status(status).json({ message, data });
+  };
+
+  create = async (req, res) => {
+    const { message, status, data } = await roleService.create(req.body);
+    res.status(status).json({ message, data });
+  };
+
+  update = async (req, res) => {
+    const { message, status, data } = await roleService.update(req.params.id, req.body);
+    res.status(status).json({ message, data });
+  };
+
+  delete = async (req, res) => {
+    const { message, status, data } = await roleService.delete(req.params.id);
+    res.status(status).json({ message, data });
+  };
+
+}
+
+export const roleController = new RoleController();

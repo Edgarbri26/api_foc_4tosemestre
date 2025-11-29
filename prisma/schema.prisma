@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// nivel 1
+
+model Role {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  status Boolean @default(true)
+  users  User[]
+
+  @@map("roles")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  status   Boolean   @default(true)
+  products Product[]
+
+  @@map("categories")
+}
+
+model Warehouse {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  status Boolean @default(true)
+  areas  Area[]
+
+  @@map("warehouses")
+}
+
+// nivel 2
+
+model User {
+  id       Int     @id @default(autoincrement())
+  name     String
+  email    String  @unique
+  password String
+  role_id  Int
+  status   Boolean @default(true)
+
+  role Role @relation(fields: [role_id], references: [id])
+
+  @@map("users")
+}
+
+model Area {
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  warehouse_id Int
+  status       Boolean @default(true)
+
+  warehouse Warehouse @relation(fields: [warehouse_id], references: [id])
+  products  Product[]
+
+  @@map("areas")
+}
+
+// nivel 3
+
+model Product {
+  id          Int     @id @default(autoincrement())
+  name        String
+  price       Float
+  quantity    Int
+  category_id Int
+  area_id     Int
+  status      Boolean @default(true)
+
+  category Category @relation(fields: [category_id], references: [id])
+  area     Area     @relation(fields: [area_id], references: [id])
+
+  @@unique([name, area_id])
+  @@map("products")
+}
