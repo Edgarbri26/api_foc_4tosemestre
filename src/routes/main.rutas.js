@@ -2,18 +2,21 @@ import { Router } from 'express';
 
 export class MainRouter {
   router: Router;
-    role_router: RoleRouter;
-    constructor() {
+  role_router: RoleRouter;
+
+  constructor() {
     this.router = Router();
     this.role_router = new RoleRouter();
     this.routes();
   }
-    private routes() {
+
+  private routes() {
     this.router.use('/', this.role_router.getRouter());
   }
-    public getRouter() {
+
+  public getRouter() {
     return this.router;
-    }
+  }
 }
 
 
@@ -27,7 +30,7 @@ export class MainRouter {
 //     this.role_validator = new RoleValidator();
 //     this.routes();
 //   }
-
+//
 //   private routes() {
 //     this.router.get('/', this.role_controller.getAll);
 //     this.router.get('/:id', this.role_controller.getOne);
@@ -39,7 +42,7 @@ export class MainRouter {
 //       this.role_controller.created,
 //     );
 //   }
-
+//
 //   public getRouter() {
 //     return this.router;
 //   }

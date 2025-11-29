@@ -1,9 +1,9 @@
 import express from 'express'
 import testRoutes from '../routes/test.rutas.js'
-import userRoutes from '../routes/usuer.rutas.js'
+import userRoutes from '../routes/users.rutas.js'
 import rolRoutes from '../routes/roles.rutas.js'
 import categoriaRoutes from '../routes/categoria.ruta.js'
-import cors from 'cors' 
+import cors from 'cors'
 
 
 
@@ -26,26 +26,26 @@ export class Servidor {
     }
     this.routes();
   }
-  
+
 
   midelware = () => {
     this.app.use(express.json())
     this.app.use(cors())
   }
 
-  routes= () => {
+  routes = () => {
     this.app.use(
       this.rutas.user, userRoutes
     ),
-    this.app.use(
-      this.rutas.test, testRoutes
-    ),
-    this.app.use(
-      this.rutas.roles, rolRoutes
-    ),
-    this.app.use(
-      this.rutas.categorias, categoriaRoutes
-    )
+      this.app.use(
+        this.rutas.test, testRoutes
+      ),
+      this.app.use(
+        this.rutas.roles, rolRoutes
+      ),
+      this.app.use(
+        this.rutas.categorias, categoriaRoutes
+      )
   }
   listen = () => {
     this.app.listen(this.port, () => {

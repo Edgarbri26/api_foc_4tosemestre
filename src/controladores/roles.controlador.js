@@ -1,40 +1,26 @@
-getOne = async (req, res) => {
-  const { id } = req.params;
-  return res.status(200).json({
-    message: `Rol encontrado`,
-    id
-  });
+import * as Service from '../services/roles.services.js';
+
+export const getAll = async (req, res) => {
+  const { status, message, data } = await Service.getAll();
+  res.status(status).json({ message, data });
 };
 
-created = async (req, res) => {
-  const { id, nombre, status } = req.body;
-  return res.status(200).json({
-    message: `Nuevo rol creado`,
-    data: {
-      id: Number(id),
-      nombre,
-      status
-    }
-  });
+export const getById = async (req, res) => {
+  const { status, message, data } = await Service.getById(req.params.id);
+  res.status(status).json({ message, data });
 };
 
-updated = async (req, res) => {
-  const { id } = req.params;
-  const { nombre, status } = req.body;
-  return res.status(200).json({
-    message: `Rol actualizado`,
-    data: {
-      id: Number(id),
-      nombre,
-      status
-    }
-  });
+export const create = async (req, res) => {
+  const { status, message, data } = await Service.create(req.body);
+  res.status(status).json({ message, data });
 };
 
-deleted = async (req, res) => {
-  const { id } = req.params;
-  return res.status(200).json({
-    message: `Rol eliminado`,
-    id
-  });
+export const update = async (req, res) => {
+  const { status, message, data } = await Service.update(req.params.id, req.body);
+  res.status(status).json({ message, data });
+};
+
+export const remove = async (req, res) => {
+  const { status, message, data } = await Service.remove(req.params.id);
+  res.status(status).json({ message, data });
 };
