@@ -1,40 +1,35 @@
-getOne = async (req, res) => {
-  const { id } = req.params;
-  return res.status(200).json({
-    message: `Rol encontrado`,
-    id
-  });
-};
+import { roleService } from '../services/roles.services.js';
 
-created = async (req, res) => {
-  const { id, nombre, status } = req.body;
-  return res.status(200).json({
-    message: `Nuevo rol creado`,
-    data: {
-      id: Number(id),
-      nombre,
-      status
-    }
-  });
-};
 
-updated = async (req, res) => {
-  const { id } = req.params;
-  const { nombre, status } = req.body;
-  return res.status(200).json({
-    message: `Rol actualizado`,
-    data: {
-      id: Number(id),
-      nombre,
-      status
-    }
-  });
-};
+class RoleController {
 
-deleted = async (req, res) => {
-  const { id } = req.params;
-  return res.status(200).json({
-    message: `Rol eliminado`,
-    id
-  });
-};
+  constructor() { }
+
+  getAll = async (req, res) => {
+    const { message, status, data } = await roleService.getall();
+    res.status(status).json({ message, data });
+  };
+
+  getOne = async (req, res) => {
+    const { message, status, data } = await roleService.getOne(req.params.id);
+    res.status(status).json({ message, data });
+  };
+
+  create = async (req, res) => {
+    const { message, status, data } = await roleService.create(req.body);
+    res.status(status).json({ message, data });
+  };
+
+  update = async (req, res) => {
+    const { message, status, data } = await roleService.update(req.params.id, req.body);
+    res.status(status).json({ message, data });
+  };
+
+  delete = async (req, res) => {
+    const { message, status, data } = await roleService.delete(req.params.id);
+    res.status(status).json({ message, data });
+  };
+
+}
+
+export const roleController = new RoleController();
